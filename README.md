@@ -2,7 +2,7 @@
 Status: **INCOMPLETE**
   
 ## Description
-* [Project specification](https://cs50.harvard.edu/web/2020/projects/4/network/)
+* [Project specification](https://cs50.harvard.edu/web/2020/projects/4/network/#specification)
 * **[Django](https://www.djangoproject.com) is used as web framework** and SQLite as the database.
 
 ## Setup 
