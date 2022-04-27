@@ -1,5 +1,83 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 {% block body %}
-    TODO
+
+    <!-- Posts -->
+    <br>
+    <h3 style="text-align: center;">{{ title }}</h3>
+    <hr>
+    <br>
+    {% if message %}
+        <h4 style="text-align: center;">{{ message }}</h4>
+    {% endif %}
+    {% for i in posts %}
+        <div class="card mb-3">
+            {% if not i.image is None %}
+            <img  id="currentimg{{ i.id }}" src="{{ i.image }}" class="card-img-top" alt="img" style="max-width: 300px; max-height: 300px; height: auto; width: auto;">
+            {% endif %}
+            <div class="card-body">
+                <p class="card-text" id="currenttxt{{ i.id }}">{{ i.text }}</p>
+                <p class="card-text"><small class="text-muted"><a href="{% url 'prof' i.poster %}">{{ i.poster }}</a> at {{ i.date }}</small></p>
+                {% if user.is_authenticated %}
+                    <i class='bi bi-heart-fill' id="post{{ i.id }}" onclick="add_like('{{ i.id }}', '{{ user.id }}')"></i> <div style="display: inline-block;" id="likes{{ i.id }}">{{ i.like_set.count }}</div>
+                {% else %}
+                    Likes: {{ i.like_set.count }}
+                {% endif %}
+                <br><br>
+                {% if user.id == i.poster_id %}
+                    <button type="button" class="btn btn-primary" value="{{ i.id }}" onclick="edit_form(this.value)">Edit</button>
+
+                    <!-- Edit form -->
+                    <div class="show" id="editform{{ i.id }}">
+                        <br>
+                        <div class="card border-primary">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <h4 class="card-title" style="margin-left: 1.5%;">Edit</h4>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <input type="url" class="form-control" id="editimg" placeholder="Image URL here">
+                                    </div>
+                                    <br>
+                                    <div class="mb-3">
+                                        <textarea class="form-control" id="edittxt" placeholder="Text here"></textarea>
+                                    </div>
+                                    <input type="hidden" id="thesender" value="{{ i.id }}">
+                                    <input type="submit" id="post_button" class="btn btn-primary" value="Edit" onclick="make_post(this.value)">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <h4 style="text-align: center;">No posts</h4>
+    {% endfor %}
+
+    <!-- Pagination -->
+    <div class="pagings">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+
+        {% if posts.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+        {% endif %}
+
+        <li class="page-item disabled"><a class="page-link" href="#">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</a></li>
+
+        {% if posts.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ posts.paginator.num_pages }}">Last &raquo;</a></li>
+        {% endif %}
+
+        </ul>
+    </nav>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
 {% endblock %}

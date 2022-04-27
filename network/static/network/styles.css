@@ -1,0 +1,28 @@
+.card.text-center.border-primary {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.pagings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.show {
+    opacity: 0;
+    height: 0px;
+    line-height: 0px;
+    transition: all 0.2s;
+}
+
+.show.on {
+    opacity: 1;
+    height: 100%;
+    line-height: 100%;
+    transition: all 0.2s;
+}
+
+.bi.bi-heart-fill {
+    color: red;
+}
