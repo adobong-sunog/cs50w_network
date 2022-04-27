@@ -48,8 +48,8 @@ function show_form () {
 function edit_form (formid) {
    
   let eform = document.querySelector(`#editform${formid}`);
-  document.querySelector('#editimg').value = '';
-  document.querySelector('#edittxt').value = '';
+  document.querySelector(`#editimg${formid}`).value = '';
+  document.querySelector(`#edittxt${formid}`).value = '';
 
   if (eform.classList.contains('on')) {
     eform.classList.remove('on');
@@ -60,7 +60,7 @@ function edit_form (formid) {
 }
 
 // Create or edit post
-function make_post (opt) {
+function make_post (opt, editid) {
   
   var choice = 'cs50 is an amazing course';
   if (opt === 'Post') {
@@ -95,10 +95,10 @@ function make_post (opt) {
     console.log('tried to edit a post');
     choice = 'edit';
 
-    const editimage = document.querySelector('#editimg').value;
-    const edittext = document.querySelector('#edittxt').value;
-    const postid = document.querySelector('#thesender').value;
-    var eform = document.querySelector(`#editform${postid}`);
+    const editimage = document.querySelector(`#editimg${editid}`).value;
+    const edittext = document.querySelector(`#edittxt${editid}`).value;
+    const postid = document.querySelector(`#thesender${editid}`).value;
+    var eform = document.querySelector(`#editform${editid}`);
 
     // 'Close' edit form after submission
     if (eform.classList.contains('on')) {
@@ -123,11 +123,11 @@ function make_post (opt) {
     })
     .then(response => response.json())
     .then(result => {
-      document.querySelector(`#currenttxt${postid}`).innerHTML = result.newtxt;
+      document.querySelector(`#currenttxt${editid}`).innerHTML = result.newtxt;
 
       // Check if there's a new image to prevent null error
       if (result.newimg != null) {
-        document.querySelector(`#currentimg${postid}`).src = `${result.newimg}`;
+        document.querySelector(`#currentimg${editid}`).src = `${result.newimg}`;
       }
     })
   }

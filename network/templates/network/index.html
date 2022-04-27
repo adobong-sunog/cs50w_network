@@ -37,14 +37,14 @@
                                 <h4 class="card-title" style="margin-left: 1.5%;">Edit</h4>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <input type="url" class="form-control" id="editimg" placeholder="Image URL here">
+                                        <input type="url" class="form-control" id="editimg{{ i.id }}" placeholder="Image URL here">
                                     </div>
                                     <br>
                                     <div class="mb-3">
-                                        <textarea class="form-control" id="edittxt" placeholder="Text here"></textarea>
+                                        <textarea class="form-control" id="edittxt{{ i.id }}" placeholder="Text here"></textarea>
                                     </div>
-                                    <input type="hidden" id="thesender" value="{{ i.id }}">
-                                    <input type="submit" id="post_button" class="btn btn-primary" value="Edit" onclick="make_post(this.value)">
+                                    <input type="hidden" id="thesender{{ i.id }}" value="{{ i.id }}">
+                                    <button type="button" id="post_button" class="btn btn-primary" onclick="make_post('Edit', '{{ i.id }}')">Confirm</button>
                                 </div>
                             </form>
                         </div>
