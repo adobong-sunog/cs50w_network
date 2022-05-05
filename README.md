@@ -1,5 +1,5 @@
 # CS50W Project 4 - Network
-Status: completed & submitted
+Status: completed & submitted (Pass)
   
 ## Description
 * [Project specification](https://cs50.harvard.edu/web/2020/projects/4/network/#specification)
