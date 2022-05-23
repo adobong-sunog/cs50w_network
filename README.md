@@ -18,6 +18,15 @@ Install any required dependencies
 ```
 pip install -r requirements.txt
 ```  
+Create a secret key 
+```python
+python -c "import secrets; print(secrets.token_urlsafe())"
+```
+Add the secret key to your bash profile
+```bash
+SECRET_KEY="the secret key from previous command"
+export SECRET_KEY 
+```
 Initialize the database
 ```
 python manage.py makemigrations network
