@@ -11,7 +11,7 @@ Status: completed & submitted (Pass)
 
 Clone this repository
 ```bash
-git clone https://github.com/AncientSoup/cs50w_network/
+git clone https://github.com/adobong-sunog/cs50w_network/
 cd cs50w_network
 ```  
 Install any required dependencies
